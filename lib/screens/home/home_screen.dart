@@ -14,59 +14,67 @@ class HomeScreen extends StatelessWidget {
           width: 55,
           child: Image.asset('assets/splash.png'),
         ),
-        leading: Icon(Icons.menu, size: 35, color: Colors.black,),
+        leading: Icon(
+          Icons.menu,
+          size: 35,
+          color: Colors.black,
+        ),
         actions: [
           Padding(
             padding:
                 const EdgeInsets.only(right: 15.0), // Jarak dari sisi kanan
             child: IconButton(
-              icon: Icon(Icons.person, size: 35, color: Colors.black,),
+              icon: Icon(
+                Icons.person,
+                size: 35,
+                color: Colors.black,
+              ),
               onPressed: () {},
             ),
           ),
         ],
       ),
       body: SingleChildScrollView(
-          child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          
-          children: List.generate(20, (index) {
-            return Container(
-              margin: EdgeInsets.only(bottom: 15.0),
-              width: 350,
-              padding: const EdgeInsets.all(20.0),
-              height: 70,
-              decoration: BoxDecoration(
-                color: Color.fromARGB(251, 241, 186, 176),
-                borderRadius: BorderRadius.circular(100.0),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.0,
-                ),
+        child: SizedBox(
+          // height: 20.0,
+          width: MediaQuery.of(context).size.width,
+          child: Column(children: [
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              'Good Morning',
+              style: TextStyle(
+                fontSize: 30,
               ),
-            );
-          }),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: List.generate(20, (index) {
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 8.0, top: 8.0),
+                    width: 350,
+                    padding: const EdgeInsets.all(20.0),
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(251, 241, 186, 176),
+                      borderRadius: BorderRadius.circular(100.0),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 1.0,
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            )
+          ]),
         ),
-      )
-          //     Column(
-          //       children: List.generate(10, (index) {return Container(
-          //         width: 336,
-          //         padding: const EdgeInsets.all(20.0),
-          //         height: 80,
-          //         decoration: BoxDecoration(
-          //           color: Color.fromARGB(252, 235, 170, 158),
-          //           borderRadius: BorderRadius.circular(60.0),
-          //           border: Border.all(
-          //             color: Colors.black,
-          //             width: 1.0,
-          //           ),
-          //         ),
-          //       )
-          //       ;}
-          //       ),
-          // ),
-          ),
+      ),
       // SizedBox(
       //   // height: 20.0,
       //   width: MediaQuery.of(context).size.width,
@@ -171,7 +179,6 @@ class HomeScreen extends StatelessWidget {
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.lightGreen,
-      
       ),
       bottomNavigationBar: SizedBox(
         height: 80,
@@ -186,15 +193,24 @@ class HomeScreen extends StatelessWidget {
             unselectedItemColor: Color(0xFF5F6469),
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.list_outlined, size: 35,),
+                icon: Icon(
+                  Icons.list_outlined,
+                  size: 35,
+                ),
                 label: 'Task List',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.home, size: 35,),
+                icon: Icon(
+                  Icons.home,
+                  size: 35,
+                ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_month, size: 35,),
+                icon: Icon(
+                  Icons.calendar_month,
+                  size: 35,
+                ),
                 label: 'Mapping',
               ),
             ],
