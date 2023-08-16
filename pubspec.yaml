@@ -12,7 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+
   cupertino_icons: ^1.0.2
+  firebase_core: ^2.15.0
+  cloud_firestore: ^4.8.4
 
 dev_dependencies:
   flutter_test:
@@ -22,8 +25,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: TitanOne
+      fonts:
+        - asset: assets/TitanOne-Regular.ttf
 
-  
+    - family: TitilliumWeb
+      fonts:
+        - asset: assets/TitilliumWeb-Regular.ttf
+
   assets:
    - assets/splash.png
 
