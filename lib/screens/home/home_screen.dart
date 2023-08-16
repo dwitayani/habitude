@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:habitude_aplication/widgets/habit_widget.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +18,7 @@ class HomeScreen extends StatelessWidget {
           width: 55,
           child: Image.asset('assets/splash.png'),
         ),
-        leading: Icon(
+        leading: const Icon(
           Icons.menu,
           size: 35,
           color: Colors.black,
@@ -24,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.only(right: 15.0), // Jarak dari sisi kanan
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.person,
                 size: 35,
                 color: Colors.black,
@@ -34,267 +38,90 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          // height: 20.0,
-          width: MediaQuery.of(context).size.width,
-          child: Column(children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              'Good Morning',
-              style: TextStyle(fontSize: 32, fontFamily: 'TitanOne'),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            SizedBox(
+      body: Container(
+        color: Colors.blue[50],
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          children: [
+            // Judul Halaman Home
+            Container(
               width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: List.generate(20, (index) {
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 8.0, top: 8.0),
-                    width: 320,
-                    padding: const EdgeInsets.all(24.0),
-                    height: 240,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Column(
-                              children: [
-                                Text('judul habbit',
-                                    style: TextStyle(
-                                        fontSize: 24, fontFamily: 'TitanOne')),
-                                Text('waktu pengulangan',
-                                    style: TextStyle(
-                                        fontSize: 16, fontFamily: 'TitanOne',
-                                        color: Colors.grey
-                                        ))
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.edit,
-                                  color: Colors.blue,
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 8.0,right: 4.0),
-                                  padding: EdgeInsets.all(5),
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.grey, width: 0.5)),
-                                  child: Text(
-                                    'S',
-                                    style: TextStyle(fontSize: 16, fontFamily: 'TitanOne', color:Color.fromARGB(255, 255, 181, 181)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 8.0,right: 4.0),
-                                  padding: EdgeInsets.all(5),
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.grey, width: 0.5)),
-                                  child: Text(
-                                    'M',
-                                    style: TextStyle(fontSize: 16, fontFamily: 'TitanOne', color:Color.fromARGB(255, 255, 181, 181)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 8.0,right: 4.0),
-                                  padding: EdgeInsets.all(5),
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.grey, width: 0.5)),
-                                  child: Text(
-                                    'T',
-                                    style: TextStyle(fontSize: 16, fontFamily: 'TitanOne', color:Color.fromARGB(255, 255, 181, 181)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 8.0,right: 4.0),
-                                  padding: EdgeInsets.all(5),
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.grey, width: 0.5)),
-                                  child: Text(
-                                    'W',
-                                    style: TextStyle(fontSize: 16, fontFamily: 'TitanOne',color:Color.fromARGB(255, 255, 181, 181)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 8.0,right: 4.0),
-                                  padding: EdgeInsets.all(5),
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.grey, width: 0.5)),
-                                  child: Text(
-                                    'T',
-                                    style: TextStyle(fontSize: 16, fontFamily: 'TitanOne', color:Color.fromARGB(255, 255, 181, 181)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 8.0,right: 4.0),
-                                  padding: EdgeInsets.all(5),
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.grey, width: 0.5)),
-                                  child: Text(
-                                    'F',
-                                    style: TextStyle(fontSize: 16, fontFamily: 'TitanOne', color:Color.fromARGB(255, 255, 181, 181)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 8.0,right: 4.0),
-                                  padding: EdgeInsets.all(5),
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.grey, width: 0.5)),
-                                  child: Text(
-                                    'S',
-                                    style: TextStyle(fontSize: 16, fontFamily: 'TitanOne', color:Color.fromARGB(255, 255, 181, 181)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Reminder', style: TextStyle(fontSize: 12, fontFamily: 'TitilliumWeb', color:Colors.grey)),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                                children: List.generate(3, (index) {
-                              return Container(
-                                
-                                 margin: EdgeInsets.only(top: 4.0,right: 4.0),
-                                width: 80,
-                                height: 32,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    border: Border.all(
-                                        color: Colors.grey, width: 1.0)),
-                              );
-                            })),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                              TextButton(
-                                  onPressed: () {},
-                                  style: TextButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(1.0),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.close, color: Colors.red),
-                                      SizedBox(width: 8),
-                                      Text(
-                                        'missed',
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              TextButton(
-                                onPressed: () {},
-                                style: TextButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(1.0),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.check, color: Colors.green),
-                                    SizedBox(width: 8),
-                                    Text(
-                                      'I do it',
-                                      style: TextStyle(
-                                        color: Colors.green,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ])
-                          ],
-                        ),
-                      ],
-                    ),
-                    
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(250, 255, 209, 201),
-                      borderRadius: BorderRadius.circular(48.0),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    ),
-                  );
-                }),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 16,
               ),
-            )
-          ]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Selamat datang",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "Disini habit mu dimulai",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Habbit body
+            // HabitWidget(),
+            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream:
+                  FirebaseFirestore.instance.collection("habits").snapshots(),
+              builder: (_, snapshot) {
+                if (!snapshot.hasData) {
+                  return Text('loading data...');
+                }
+                List<DocumentSnapshot<Map<String, dynamic>>> docs =
+                    snapshot.data!.docs;
+                return Column(
+                  children: List.generate(docs.length, (index) {
+                    return HabitWidget(
+                      judul: docs[index].data()!['nama'],
+                      jadwalHari: List<String>.from(
+                          docs[index].data()!['hari_mengulang']),
+                    );
+                  }),
+                );
+              },
+            ),
+          ],
         ),
       ),
+      // body: SingleChildScrollView(
+      //   child: SizedBox(
+      //     // height: 20.0,
+      //     width: MediaQuery.of(context).size.width,
+      //     child: Column(children: [
+      //       const SizedBox(
+      //         height: 20.0,
+      //       ),
+      //       Text(
+      //         'Good Morning',
+      //         style: TextStyle(fontSize: 32, fontFamily: 'TitanOne'),
+      //       ),
+      //       SizedBox(
+      //         height: 20.0,
+      //       ),
+      //       SizedBox(
+      //         width: MediaQuery.of(context).size.width,
+      //         child: Column(
+      //           children: List.generate(20, (index) {
+
+      //           }),
+      //         ),
+      //       )
+      //     ]),
+      //   ),
+      // ),
       // SizedBox(
       //   // height: 20.0,
       //   width: MediaQuery.of(context).size.width,
@@ -398,7 +225,7 @@ class HomeScreen extends StatelessWidget {
           print('Tombol tambah diklik');
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Color(0xFF7EBB94),
       ),
       bottomNavigationBar: SizedBox(
         height: 80,
