@@ -85,9 +85,12 @@ class HomeScreen extends StatelessWidget {
                 return Column(
                   children: List.generate(docs.length, (index) {
                     return HabitWidget(
+                      id: docs[index].id,
                       judul: docs[index].data()!['nama'],
                       jadwalHari: List<String>.from(
                           docs[index].data()!['hari_mengulang']),
+                      jamPengingat: List<String>.from(
+                          docs[index].data()!['jam_pengingat']),
                     );
                   }),
                 );

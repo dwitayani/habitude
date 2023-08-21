@@ -1,9 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+
 class HabitWidget extends StatefulWidget {
+  final String id;
   final String judul;
   final List<String> jadwalHari;
-  const HabitWidget({super.key, required this.judul, required this.jadwalHari});
+  final List<String> jamPengingat;
+  const HabitWidget(
+      {super.key,
+      required this.id,
+      required this.judul,
+      required this.jadwalHari,
+      required this.jamPengingat});
 
   @override
   State<HabitWidget> createState() => _HabitWidgetState();
@@ -56,15 +65,20 @@ class _HabitWidgetState extends State<HabitWidget> {
                 ),
               ),
               if (isOpen)
-                const Row(
+               Row(
                   children: [
                     Icon(
                       Icons.edit,
                       color: Colors.blue,
                     ),
-                    Icon(
-                      Icons.delete,
-                      color: Colors.red,
+                    InkWell(onTap: ()async{
+                      await FirebaseFirestore.instance.collection("habits").doc(widget.id).delete();
+                    },
+                      child: Icon(
+                        
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
                     )
                   ],
                 ),
@@ -147,20 +161,26 @@ class _HabitWidgetState extends State<HabitWidget> {
                         color: Colors.grey,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: List.generate(3, (index) {
-                        return Container(
-                          margin: EdgeInsets.only(top: 4.0, right: 4.0),
-                          width: 80,
-                          height: 32,
-                          decoration: BoxDecoration(
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children:
+                            List.generate(widget.jamPengingat.length, (index) {
+                          return Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(top: 4.0, right: 4.0),
+                            width: 80,
+                            height: 32,
+                            decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8.0),
-                              border:
-                                  Border.all(color: Colors.grey, width: 1.0)),
-                        );
-                      }),
+                              border: Border.all(color: Colors.grey, width: 1.0),
+                            ),
+                            child: Text(widget.jamPengingat[index], style: TextStyle( fontSize: 20),),
+                          );
+                        }),
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
