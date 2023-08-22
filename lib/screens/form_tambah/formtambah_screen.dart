@@ -2,10 +2,18 @@
 
 import 'package:flutter/material.dart';
 
-class FormTambahScreen extends StatelessWidget {
+class FormTambahScreen extends StatefulWidget {
   const FormTambahScreen({super.key});
 
   @override
+  State<FormTambahScreen> createState() => _FormTambahScreenState();
+}
+
+class _FormTambahScreenState extends State<FormTambahScreen> {
+  TextEditingController judulController =TextEditingController();
+  List<String> jadwal = [];
+  List<String> reminder= [];
+  @override 
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -22,14 +30,38 @@ class FormTambahScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: const Text(
+              const Center(
+                child: Text(
                   'create new habit',
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'TitanOne',
                     fontSize: 28,
                   ),
+                ),
+              ),
+              Container(
+                child: TextField(
+                  controller: judulController,
+                  
+                ),
+                margin: const EdgeInsets.only(top: 16, bottom: 16),
+                padding: const EdgeInsets.all(5),
+                width: 360,
+                height: 48,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 0.5,
+                  ),
+                ),
+              ),
+              const Text(
+                'starting',
+                style: TextStyle(
+                  color: Colors.white,
                 ),
               ),
               Container(
@@ -46,18 +78,15 @@ class FormTambahScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Column(
-                children: [
-                  Text(
-                    'starting',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+              const Text(
+                'end',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'TitiliumWeb',
+                ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 16,  bottom: 16),
+                margin: const EdgeInsets.only(top: 16, bottom: 16),
                 padding: const EdgeInsets.all(5),
                 width: 360,
                 height: 48,
@@ -70,22 +99,12 @@ class FormTambahScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Text('end'),
-              Container(
-                margin: const EdgeInsets.only(top: 16,  bottom: 16),
-                padding: const EdgeInsets.all(5),
-                width: 360,
-                height: 48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
+              const Text('interval and repetition',
+              style: TextStyle(
                   color: Colors.white,
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 0.5,
-                  ),
+                  fontFamily: 'TitiliumWeb',
                 ),
-              ),
-              const Text('interval and repetition'),
+                ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -102,8 +121,8 @@ class FormTambahScreen extends StatelessWidget {
                   //   isScheduled = true;
                   // }
                   return Container(
-                    margin: EdgeInsets.only(top: 8.0, right: 4.0),
-                    padding: EdgeInsets.all(5),
+                    margin: const EdgeInsets.only(top: 8.0, right: 4.0),
+                    padding: const EdgeInsets.all(5),
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
@@ -130,7 +149,13 @@ class FormTambahScreen extends StatelessWidget {
                   );
                 }).toList(),
               ),
-              Text('reminder'),
+              const Text(
+                'reminder',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'TitiliumWeb',
+                ),
+              ),
               Row(
                 children: [
                   Container(
@@ -144,49 +169,71 @@ class FormTambahScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.delete,
                     color: Colors.red,
                   ),
                 ],
               ),
               Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 8.0, right: 4.0),
                 height: 28,
                 width: 152,
                 decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: Colors.grey,
-                    )),
+                  color: Color.fromARGB(255, 64, 152, 96),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Color.fromARGB(255, 42, 90, 59)),
+                ),
                 child: Text(
                   'add',
-                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'TitanOne',
+                  ),
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(top: 8.0, right: 4.0),
                     height: 28,
                     width: 152,
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 219, 42, 42),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.grey,
-                        )),
-                    child: Text('cancel'),
+                      color: Color.fromARGB(255, 207, 88, 80),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: Color.fromARGB(255, 175, 42, 32),
+                      ),
+                    ),
+                    child: Text(
+                      'cancel',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'TitanOne',
+                      ),
+                    ),
                   ),
                   Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(top: 8.0, right: 4.0),
                     height: 28,
                     width: 152,
                     decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.grey,
-                        )),
-                    child: Text('save'),
+                      color: Color.fromARGB(255, 64, 152, 96),
+                      borderRadius: BorderRadius.circular(16),
+                      border:
+                          Border.all(color: Color.fromARGB(255, 42, 90, 59)),
+                    ),
+                    child: Text(
+                      'save',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'TitanOne',
+                      ),
+                    ),
                   ),
                 ],
               )

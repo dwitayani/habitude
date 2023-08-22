@@ -1,20 +1,19 @@
+// ignore_for_file: unused_import
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class TaskListWidget extends StatefulWidget {
   final String id;
   final String namatask;
-  const TaskListWidget(
-    {super.key,
-    required this.id,
-    required this.namatask
-    });
+  const TaskListWidget({super.key, required this.id, required this.namatask});
 
   @override
   State<TaskListWidget> createState() => _TaskListWidgetState();
 }
 
 class _TaskListWidgetState extends State<TaskListWidget> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +33,19 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       ),
       child: Column(
         children: [
-          Text(widget.namatask)
+          Row(
+            children: [
+              Checkbox(
+                value: isChecked,
+                onChanged: (bool? value) {
+                  setState(() {
+                    isChecked = value!;
+                  });
+                },
+              ),
+              Text(widget.namatask),
+            ],
+          )
         ],
       ),
     );
