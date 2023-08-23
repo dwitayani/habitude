@@ -10,10 +10,10 @@ class FormTambahScreen extends StatefulWidget {
 }
 
 class _FormTambahScreenState extends State<FormTambahScreen> {
-  TextEditingController judulController =TextEditingController();
+  TextEditingController judulController = TextEditingController();
   List<String> jadwal = [];
-  List<String> reminder= [];
-  @override 
+  List<String> reminder = [];
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -43,7 +43,6 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
               Container(
                 child: TextField(
                   controller: judulController,
-                  
                 ),
                 margin: const EdgeInsets.only(top: 16, bottom: 16),
                 padding: const EdgeInsets.all(5),
@@ -99,12 +98,13 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   ),
                 ),
               ),
-              const Text('interval and repetition',
-              style: TextStyle(
+              const Text(
+                'interval and repetition',
+                style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'TitiliumWeb',
                 ),
-                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -117,34 +117,44 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   "Saturday",
                 ].map((e) {
                   bool isScheduled = false;
-                  // if (widget.jadwalHari.contains(e)) {
-                  //   isScheduled = true;
-                  // }
-                  return Container(
-                    margin: const EdgeInsets.only(top: 8.0, right: 4.0),
-                    padding: const EdgeInsets.all(5),
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isScheduled
-                          ? const Color.fromARGB(255, 255, 181, 181)
-                          : Colors.white,
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    child: Text(
-                      e[0],
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'TitanOne',
-                        color: !isScheduled
+                  if (jadwal.contains(e)) {
+                    isScheduled = true;
+                  }
+                  return InkWell(
+                    onTap: () {
+                      if (isScheduled) {
+                        jadwal.remove((jadwalNya) => jadwalNya == e);
+                      } else {
+                        jadwal.add(e);
+                      }
+                      setState(() {});
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 8.0, right: 4.0),
+                      padding: const EdgeInsets.all(5),
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isScheduled
                             ? const Color.fromARGB(255, 255, 181, 181)
                             : Colors.white,
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
-                      textAlign: TextAlign.center,
+                      child: Text(
+                        e[0],
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'TitanOne',
+                          color: !isScheduled
+                              ? const Color.fromARGB(255, 255, 181, 181)
+                              : Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   );
                 }).toList(),
