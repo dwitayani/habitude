@@ -54,7 +54,7 @@ class _HabitWidgetState extends State<HabitWidget> {
                       ),
                     ),
                     Text(
-                      'waktu pengulangan',
+                      "${widget.jadwalHari.length} times a week",
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: 'TitanOne',

@@ -1,6 +1,6 @@
-// ignore_for_file: dead_code
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class FormTambahScreen extends StatefulWidget {
   const FormTambahScreen({super.key});
@@ -13,6 +13,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
   TextEditingController judulController = TextEditingController();
   List<String> jadwal = [];
   List<String> reminder = [];
+  DateTimeRange? interval;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,17 +64,31 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   color: Colors.white,
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 16, bottom: 16),
-                padding: const EdgeInsets.all(5),
-                width: 360,
-                height: 48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 0.5,
+              InkWell(
+                onTap: () async {
+                  interval = await showDateRangePicker(
+                    context: context,
+                    initialDateRange: interval,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2030),
+                  );
+                  setState(() {});
+                },
+                child: Container(
+                  child: Text(interval != null
+                      ? DateFormat("dd-MM-yyyy").format(interval!.start)
+                      : ""),
+                  margin: const EdgeInsets.only(top: 16, bottom: 16),
+                  padding: const EdgeInsets.all(5),
+                  width: 360,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 0.5,
+                    ),
                   ),
                 ),
               ),
@@ -84,17 +99,31 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   fontFamily: 'TitiliumWeb',
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 16, bottom: 16),
-                padding: const EdgeInsets.all(5),
-                width: 360,
-                height: 48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 0.5,
+              InkWell(
+                onTap: () async {
+                  interval = await showDateRangePicker(
+                    context: context,
+                    initialDateRange: interval,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2030),
+                  );
+                  setState(() {});
+                },
+                child: Container(
+                  child: Text(interval != null
+                      ? DateFormat("dd-MM-yyyy").format(interval!.end)
+                      : ""),
+                  margin: const EdgeInsets.only(top: 16, bottom: 16),
+                  padding: const EdgeInsets.all(5),
+                  width: 360,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 0.5,
+                    ),
                   ),
                 ),
               ),
@@ -123,7 +152,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   return InkWell(
                     onTap: () {
                       if (isScheduled) {
-                        jadwal.remove((jadwalNya) => jadwalNya == e);
+                        jadwal.remove(e);
                       } else {
                         jadwal.add(e);
                       }
@@ -166,85 +195,128 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   fontFamily: 'TitiliumWeb',
                 ),
               ),
-              Row(
-                children: [
-                  Container(
-                    width: 160,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: Colors.grey,
+              Column(
+                  children: List.generate(reminder.length, (index) {
+                return Row(
+                  children: [
+                    Container(
+                      child: Text(reminder[index]),
+                      width: 160,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
+                    InkWell(
+                      onTap: () {
+                        reminder.removeAt(index);
+                        setState(() {});
+                      },
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                );
+              })),
+              InkWell(
+                onTap: () async {
+                  TimeOfDay? selectedTime = await showTimePicker(
+                    initialTime: TimeOfDay.now(),
+                    context: context,
+                  );
+                  if (selectedTime != null) {
+                    reminder.add("${selectedTime.hour}:${selectedTime.minute}");
+                    setState(() {});
+                  }
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 8.0, right: 4.0),
+                  height: 28,
+                  width: 152,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 64, 152, 96),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Color.fromARGB(255, 42, 90, 59)),
                   ),
-                  const Icon(
-                    Icons.delete,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-              Container(
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(top: 8.0, right: 4.0),
-                height: 28,
-                width: 152,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 64, 152, 96),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Color.fromARGB(255, 42, 90, 59)),
-                ),
-                child: Text(
-                  'add',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'TitanOne',
+                  child: Text(
+                    'add',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'TitanOne',
+                    ),
                   ),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 8.0, right: 4.0),
-                    height: 28,
-                    width: 152,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 207, 88, 80),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: Color.fromARGB(255, 175, 42, 32),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(top: 8.0, right: 4.0),
+                      height: 28,
+                      width: 152,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 207, 88, 80),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Color.fromARGB(255, 175, 42, 32),
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      'cancel',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'TitanOne',
-                      ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 8.0, right: 4.0),
-                    height: 28,
-                    width: 152,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 64, 152, 96),
-                      borderRadius: BorderRadius.circular(16),
-                      border:
-                          Border.all(color: Color.fromARGB(255, 42, 90, 59)),
-                    ),
-                    child: Text(
-                      'save',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'TitanOne',
+                      child: Text(
+                        'cancel',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'TitanOne',
+                        ),
                       ),
                     ),
                   ),
+                  InkWell(
+                    onTap: () async {
+                      await FirebaseFirestore.instance
+                          .collection('habits')
+                          .add({
+                        "hari_mengulang": jadwal,
+                        "jam_pengingat": reminder,
+                        "nama": judulController.text,
+                        "interval": {
+                          "start": interval?.start,
+                          "end": interval?.end,
+                        }
+                      });
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(top: 8.0, right: 4.0),
+                      height: 28,
+                      width: 152,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 64, 152, 96),
+                        borderRadius: BorderRadius.circular(16),
+                        border:
+                            Border.all(color: Color.fromARGB(255, 42, 90, 59)),
+                      ),
+                      child: Text(
+                        'save',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'TitanOne',
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               )
             ],
