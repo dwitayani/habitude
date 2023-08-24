@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+class AccountScreen extends StatelessWidget {
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SettingScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
-          "setting",
+          "account",
           style: TextStyle(
             color: Colors.black,
             fontFamily: "TitanOne",
@@ -33,34 +33,10 @@ class SettingScreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Notification Settings',
-              style: TextStyle(
-                fontFamily: 'TitiliumWeb',
-                fontSize: 20,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Application Version Info',
-              style: TextStyle(
-                fontFamily: 'TitiliumWeb',
-                fontSize: 20,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Turn On Holiday Mode',
-              style: TextStyle(
-                fontFamily: 'TitiliumWeb',
-                fontSize: 20,
-              ),
+            Container(
+              color: Colors.green,
+              child: Text("Sign in"),
             )
           ],
         ),
