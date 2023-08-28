@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 
 class HabitWidget extends StatefulWidget {
   final String id;
   final String judul;
   final List<String> jadwalHari;
   final List<String> jamPengingat;
+  final DateTimeRange interval;
   const HabitWidget(
       {super.key,
       required this.id,
       required this.judul,
       required this.jadwalHari,
-      required this.jamPengingat});
+      required this.jamPengingat,
+      required this.interval});
 
   @override
   State<HabitWidget> createState() => _HabitWidgetState();
@@ -65,17 +67,20 @@ class _HabitWidgetState extends State<HabitWidget> {
                 ),
               ),
               if (isOpen)
-               Row(
+                Row(
                   children: [
                     Icon(
                       Icons.edit,
                       color: Colors.blue,
                     ),
-                    InkWell(onTap: ()async{
-                      await FirebaseFirestore.instance.collection("habits").doc(widget.id).delete();
-                    },
+                    InkWell(
+                      onTap: () async {
+                        await FirebaseFirestore.instance
+                            .collection("habits")
+                            .doc(widget.id)
+                            .delete();
+                      },
                       child: Icon(
-                        
                         Icons.delete,
                         color: Colors.red,
                       ),
@@ -175,9 +180,13 @@ class _HabitWidgetState extends State<HabitWidget> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(color: Colors.grey, width: 1.0),
+                              border:
+                                  Border.all(color: Colors.grey, width: 1.0),
                             ),
-                            child: Text(widget.jamPengingat[index], style: TextStyle( fontSize: 20),),
+                            child: Text(
+                              widget.jamPengingat[index],
+                              style: TextStyle(fontSize: 20),
+                            ),
                           );
                         }),
                       ),
@@ -185,7 +194,20 @@ class _HabitWidgetState extends State<HabitWidget> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        TextButton(
+                        Builder(builder: (context) {
+                          bool isToday = false;
+                          DateTime today = DateTime.now();
+                          if (today.isAfter(widget.interval.start) &&
+                              today.isBefore(widget.interval.end)) {
+                            if (widget.jadwalHari
+                                .contains(DateFormat("EEEE").format(today))) {
+                              isToday = true;
+                            }
+                          }
+                          if (!isToday) {
+                            return SizedBox();
+                          }
+                          return TextButton(
                             onPressed: () {},
                             style: TextButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -203,27 +225,31 @@ class _HabitWidgetState extends State<HabitWidget> {
                                   ),
                                 ),
                               ],
-                            )),
-                        TextButton(
-                          onPressed: () {},
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(1.0),
                             ),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(Icons.check, color: Colors.green),
-                              SizedBox(width: 8),
-                              Text(
-                                'I do it',
-                                style: TextStyle(
-                                  color: Colors.green,
-                                ),
+                          );
+                        }),
+                        Builder(builder: (context) {
+                          return TextButton(
+                            onPressed: () {},
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(1.0),
                               ),
-                            ],
-                          ),
-                        )
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(Icons.check, color: Colors.green),
+                                SizedBox(width: 8),
+                                Text(
+                                  'I do it',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        })
                       ],
                     )
                   ],

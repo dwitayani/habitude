@@ -14,14 +14,16 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
   List<String> jadwal = [];
   List<String> reminder = [];
   DateTimeRange? interval;
+  bool _isCompleate = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.98, // 80% lebar layar
+          width: MediaQuery.of(context).size.width * 0.98, // 98% lebar layar
           height: 800,
-          padding: const EdgeInsets.all(16.0),
+          margin: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 126, 187, 148),
             borderRadius: BorderRadius.circular(28),
@@ -46,18 +48,20 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   controller: judulController,
                 ),
                 margin: const EdgeInsets.only(top: 16, bottom: 16),
-                padding: const EdgeInsets.all(5),
                 width: 360,
                 height: 48,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: Colors.white,
                   border: Border.all(
-                    color: Colors.grey,
+                    color: _isCompleate ? Colors.grey : Colors.red,
                     width: 0.5,
                   ),
                 ),
               ),
+              Text('harus diisi',
+                  style: TextStyle(
+                      color: _isCompleate ? Colors.transparent : Colors.red)),
               const Text(
                 'starting',
                 style: TextStyle(
@@ -79,7 +83,6 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                       ? DateFormat("dd-MM-yyyy").format(interval!.start)
                       : ""),
                   margin: const EdgeInsets.only(top: 16, bottom: 16),
-                  padding: const EdgeInsets.all(5),
                   width: 360,
                   height: 48,
                   decoration: BoxDecoration(
@@ -114,7 +117,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                       ? DateFormat("dd-MM-yyyy").format(interval!.end)
                       : ""),
                   margin: const EdgeInsets.only(top: 16, bottom: 16),
-                  padding: const EdgeInsets.all(5),
+                  // padding: const EdgeInsets.all(5),
                   width: 360,
                   height: 48,
                   decoration: BoxDecoration(
@@ -160,7 +163,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 8.0, right: 4.0),
-                      padding: const EdgeInsets.all(5),
+                      // padding: const EdgeInsets.all(5),
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
@@ -263,7 +266,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      margin: EdgeInsets.only(top: 8.0, right: 4.0),
+                      padding: EdgeInsets.only(top: 8.0, right: 4.0),
                       height: 28,
                       width: 152,
                       decoration: BoxDecoration(
@@ -284,18 +287,34 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   ),
                   InkWell(
                     onTap: () async {
-                      await FirebaseFirestore.instance
-                          .collection('habits')
-                          .add({
-                        "hari_mengulang": jadwal,
-                        "jam_pengingat": reminder,
-                        "nama": judulController.text,
-                        "interval": {
-                          "start": interval?.start,
-                          "end": interval?.end,
-                        }
-                      });
-                      Navigator.pop(context);
+                      if (jadwal.isEmpty ||
+                          reminder.isEmpty ||
+                          judulController.text.isEmpty ||
+                          interval == null) {
+                        print(SnackBar(content: Text('harus diisi semua iya')));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('data tidak boleh kosong'),
+                          duration: Duration(seconds: 2),
+                        ));
+                        _isCompleate = false;
+                      } else {
+                        await FirebaseFirestore.instance
+                            .collection('habits')
+                            .add({
+                          "hari_mengulang": jadwal,
+                          "jam_pengingat": reminder,
+                          "nama": judulController.text,
+                          "interval": {
+                            "start": interval?.start,
+                            "end": interval?.end,
+                          }
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('data berhasil ditambah'),
+                          duration: Duration(seconds: 2),
+                        ));
+                        Navigator.pop(context);
+                      }
                     },
                     child: Container(
                       alignment: Alignment.center,

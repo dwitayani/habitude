@@ -5,6 +5,7 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -13,7 +14,9 @@ class SettingScreen extends StatelessWidget {
             color: Colors.black,
             size: 35,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         toolbarHeight: 70,
         centerTitle: true,
@@ -35,33 +38,53 @@ class SettingScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Notification Settings',
-              style: TextStyle(
-                fontFamily: 'TitiliumWeb',
-                fontSize: 20,
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(1.0),
+                ),
+              ),
+              child: Text(
+                'Notification Settings',
+                style: TextStyle(
+                  fontFamily: 'TitiliumWeb',
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Application Version Info',
-              style: TextStyle(
-                fontFamily: 'TitiliumWeb',
-                fontSize: 20,
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(1.0),
+                ),
+              ),
+              child: Text(
+                'Turn On Holiday Mode',
+                style: TextStyle(
+                  fontFamily: 'TitiliumWeb',
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Turn On Holiday Mode',
-              style: TextStyle(
-                fontFamily: 'TitiliumWeb',
-                fontSize: 20,
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(1.0)),
               ),
-            )
+              child: Text(
+                'Aplication Version Info',
+                style: TextStyle(
+                  fontFamily: 'TitiliumWeb',
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -13,7 +13,9 @@ class AccountScreen extends StatelessWidget {
             color: Colors.black,
             size: 35,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         toolbarHeight: 70,
         centerTitle: true,
@@ -35,8 +37,15 @@ class AccountScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              color: Colors.green,
+              width: 104,
+              height: 48,
               child: Text("Sign in"),
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(
+                    color: Color.fromARGB(255, 38, 114, 38), width: 1.0),
+              ),
             )
           ],
         ),
