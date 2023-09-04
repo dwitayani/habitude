@@ -43,8 +43,6 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
   List<String> reminder = [];
   DateTimeRange? interval;
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -60,11 +58,14 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
           border: Border.all(
               color: const Color.fromARGB(255, 64, 115, 82), width: 4),
         ),
-        child: Column(
+        child: SingleChildScrollView(
+            child: Column(
           children: [
             Text("Edit Habit ude"),
             Container(
-              child: Text(widget.judul, style: TextStyle( color: Colors.black) ,),
+              child: TextField(
+                controller: judulController,
+              ),
               margin: EdgeInsets.all(12),
               padding: EdgeInsets.all(8),
               width: 360,
@@ -310,7 +311,8 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                     } else {
                       await FirebaseFirestore.instance
                           .collection('habits')
-                          .add({
+                          .doc('doc.id')
+                          .update({
                         "hari_mengulang": jadwal,
                         "jam_pengingat": reminder,
                         "nama": judulController.text,
@@ -321,7 +323,7 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('data berhasil ditambah'),
+                          content: Text('data berhasil diedit'),
                           duration: Duration(seconds: 2),
                         ),
                       );
@@ -351,7 +353,7 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
               ],
             )
           ],
-        ),
+        )),
       ),
     );
     //   showDialog(
