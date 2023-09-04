@@ -21,7 +21,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
     return Scaffold(
       body: Center(
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.98, // 98% lebar layar
+          width: 500, // 98% lebar layar
           height: 800,
           margin: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
@@ -59,9 +59,6 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   ),
                 ),
               ),
-              Text('harus diisi',
-                  style: TextStyle(
-                      color: _isCompleate ? Colors.transparent : Colors.red)),
               const Text(
                 'starting',
                 style: TextStyle(

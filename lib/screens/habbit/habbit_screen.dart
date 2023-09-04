@@ -70,7 +70,7 @@ class habbitScreen extends StatelessWidget {
                         end: DateTime.fromMillisecondsSinceEpoch((docs[index]
                                 .data()!['interval']['end'] as Timestamp)
                             .millisecondsSinceEpoch),
-                      ),
+                      ), habit: docs[index],
                     );
                   }),
                 );

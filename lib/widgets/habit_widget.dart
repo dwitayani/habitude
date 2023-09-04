@@ -2,19 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../Dialog/edithabit_dialog.dart';
+
 class HabitWidget extends StatefulWidget {
   final String id;
   final String judul;
   final List<String> jadwalHari;
   final List<String> jamPengingat;
   final DateTimeRange interval;
+  final DocumentSnapshot<Map<String, dynamic>> habit;
   const HabitWidget(
       {super.key,
       required this.id,
       required this.judul,
       required this.jadwalHari,
       required this.jamPengingat,
-      required this.interval});
+      required this.interval,
+      required this.habit
+      });
 
   @override
   State<HabitWidget> createState() => _HabitWidgetState();
@@ -72,9 +77,19 @@ class _HabitWidgetState extends State<HabitWidget> {
                 if (isOpen)
                   Row(
                     children: [
-                      Icon(
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return EditHabitDialog(habit: widget.habit, id: '', judul: '', jadwalHari: [], jamPengingat: [], interval: widget.interval,);
+                            },
+                          );
+                        },
+                        child: Icon(
                         Icons.edit,
                         color: Colors.blue,
+                      ),
                       ),
                       InkWell(
                         onTap: () async {
