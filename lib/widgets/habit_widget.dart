@@ -18,8 +18,7 @@ class HabitWidget extends StatefulWidget {
       required this.jadwalHari,
       required this.jamPengingat,
       required this.interval,
-      required this.habit
-      });
+      required this.habit});
 
   @override
   State<HabitWidget> createState() => _HabitWidgetState();
@@ -34,7 +33,7 @@ class _HabitWidgetState extends State<HabitWidget> {
     return Container(
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(
-          horizontal: 16,
+          horizontal: 4,
           vertical: 4,
         ),
         padding: const EdgeInsets.all(24.0),
@@ -42,7 +41,7 @@ class _HabitWidgetState extends State<HabitWidget> {
           color: widget.jadwalHari.contains(DateFormat("EEEE").format(today))
               ? Color.fromARGB(250, 255, 209, 201)
               : Color.fromARGB(250, 255, 209, 201).withOpacity(0.5),
-          borderRadius: BorderRadius.circular(48.0),
+          borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: Colors.black,
             width: 1.0,
@@ -82,14 +81,21 @@ class _HabitWidgetState extends State<HabitWidget> {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return EditHabitDialog(habit: widget.habit, id: '', judul: '', jadwalHari: [], jamPengingat: [], interval: widget.interval,);
+                              return EditHabitDialog(
+                                habit: widget.habit,
+                                id: '',
+                                judul: '',
+                                jadwalHari: [],
+                                jamPengingat: [],
+                                interval: widget.interval,
+                              );
                             },
                           );
                         },
                         child: Icon(
-                        Icons.edit,
-                        color: Colors.blue,
-                      ),
+                          Icons.edit,
+                          color: Colors.blue,
+                        ),
                       ),
                       InkWell(
                         onTap: () async {

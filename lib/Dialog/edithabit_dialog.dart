@@ -44,6 +44,23 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
   DateTimeRange? interval;
 
   @override
+  void initState() {
+    super.initState();
+    judulController.text = widget.habit.data()?['nama'];
+    jadwal = List<String>.from(widget.habit.data()!['hari_mengulang']);
+    reminder = List<String>.from(widget.habit.data()!['jam_pengingat']);
+    interval = DateTimeRange(
+                        start: DateTime.fromMillisecondsSinceEpoch((widget.habit
+                                .data()!['interval']['start'] as Timestamp)
+                            .millisecondsSinceEpoch),
+                        end: DateTime.fromMillisecondsSinceEpoch((widget.habit
+                                .data()!['interval']['end'] as Timestamp)
+                            .millisecondsSinceEpoch),
+                      );
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.transparent,
@@ -311,7 +328,7 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                     } else {
                       await FirebaseFirestore.instance
                           .collection('habits')
-                          .doc('doc.id')
+                          .doc(widget.habit.id)
                           .update({
                         "hari_mengulang": jadwal,
                         "jam_pengingat": reminder,
