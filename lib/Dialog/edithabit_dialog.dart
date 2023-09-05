@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 class EditHabitDialog extends StatefulWidget {
   final String id;
@@ -90,135 +90,135 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                 color: Colors.white,
               ),
             ),
-            Text(
-              'starting',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            InkWell(
-              onTap: () async {
-                interval = await showDateRangePicker(
-                  context: context,
-                  initialDateRange: interval,
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime(2030),
-                );
-                setState(() {});
-              },
-              child: Container(
-                child: Text(interval != null
-                    ? DateFormat("dd-MM-yyyy").format(interval!.start)
-                    : ""),
-                margin: const EdgeInsets.only(top: 16, bottom: 16),
-                width: 360,
-                height: 48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 0.5,
-                  ),
-                ),
-              ),
-            ),
-            const Text(
-              'end',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'TitiliumWeb',
-              ),
-            ),
-            InkWell(
-              onTap: () async {
-                interval = await showDateRangePicker(
-                  context: context,
-                  initialDateRange: interval,
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime(2030),
-                );
-                setState(() {});
-              },
-              child: Container(
-                child: Text(interval != null
-                    ? DateFormat("dd-MM-yyyy").format(interval!.end)
-                    : ""),
-                margin: const EdgeInsets.only(top: 16, bottom: 16),
-                // padding: const EdgeInsets.all(5),
-                width: 360,
-                height: 48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 0.5,
-                  ),
-                ),
-              ),
-            ),
-            const Text(
-              'interval and repetition',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'TitiliumWeb',
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-              ].map((e) {
-                bool isScheduled = false;
-                if (jadwal.contains(e)) {
-                  isScheduled = true;
-                }
-                return InkWell(
-                  onTap: () {
-                    if (isScheduled) {
-                      jadwal.remove(e);
-                    } else {
-                      jadwal.add(e);
-                    }
-                    setState(() {});
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 8.0, right: 4.0),
-                    // padding: const EdgeInsets.all(5),
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isScheduled
-                          ? const Color.fromARGB(255, 255, 181, 181)
-                          : Colors.white,
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    child: Text(
-                      e[0],
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'TitanOne',
-                        color: !isScheduled
-                            ? const Color.fromARGB(255, 255, 181, 181)
-                            : Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
+            // Text(
+            //   'starting',
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //   ),
+            // ),
+            // InkWell(
+            //   onTap: () async {
+            //     interval = await showDateRangePicker(
+            //       context: context,
+            //       initialDateRange: interval,
+            //       firstDate: DateTime.now(),
+            //       lastDate: DateTime(2030),
+            //     );
+            //     setState(() {});
+            //   },
+            //   child: Container(
+            //     child: Text(interval != null
+            //         ? DateFormat("dd-MM-yyyy").format(interval!.start)
+            //         : ""),
+            //     margin: const EdgeInsets.only(top: 16, bottom: 16),
+            //     width: 360,
+            //     height: 48,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(16),
+            //       color: Colors.white,
+            //       border: Border.all(
+            //         color: Colors.grey,
+            //         width: 0.5,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // const Text(
+            //   'end',
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //     fontFamily: 'TitiliumWeb',
+            //   ),
+            // ),
+            // InkWell(
+            //   onTap: () async {
+            //     interval = await showDateRangePicker(
+            //       context: context,
+            //       initialDateRange: interval,
+            //       firstDate: DateTime.now(),
+            //       lastDate: DateTime(2030),
+            //     );
+            //     setState(() {});
+            //   },
+            //   child: Container(
+            //     child: Text(interval != null
+            //         ? DateFormat("dd-MM-yyyy").format(interval!.end)
+            //         : ""),
+            //     margin: const EdgeInsets.only(top: 16, bottom: 16),
+            //     // padding: const EdgeInsets.all(5),
+            //     width: 360,
+            //     height: 48,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(16),
+            //       color: Colors.white,
+            //       border: Border.all(
+            //         color: Colors.grey,
+            //         width: 0.5,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // const Text(
+            //   'interval and repetition',
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //     fontFamily: 'TitiliumWeb',
+            //   ),
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     "Sunday",
+            //     "Monday",
+            //     "Tuesday",
+            //     "Wednesday",
+            //     "Thursday",
+            //     "Friday",
+            //     "Saturday",
+            //   ].map((e) {
+            //     bool isScheduled = false;
+            //     if (jadwal.contains(e)) {
+            //       isScheduled = true;
+            //     }
+            //     return InkWell(
+            //       onTap: () {
+            //         if (isScheduled) {
+            //           jadwal.remove(e);
+            //         } else {
+            //           jadwal.add(e);
+            //         }
+            //         setState(() {});
+            //       },
+            //       child: Container(
+            //         margin: const EdgeInsets.only(top: 8.0, right: 4.0),
+            //         // padding: const EdgeInsets.all(5),
+            //         width: 32,
+            //         height: 32,
+            //         decoration: BoxDecoration(
+            //           shape: BoxShape.circle,
+            //           color: isScheduled
+            //               ? const Color.fromARGB(255, 255, 181, 181)
+            //               : Colors.white,
+            //           border: Border.all(
+            //             color: Colors.grey,
+            //             width: 0.5,
+            //           ),
+            //         ),
+            //         child: Text(
+            //           e[0],
+            //           style: TextStyle(
+            //             fontSize: 16,
+            //             fontFamily: 'TitanOne',
+            //             color: !isScheduled
+            //                 ? const Color.fromARGB(255, 255, 181, 181)
+            //                 : Colors.white,
+            //           ),
+            //           textAlign: TextAlign.center,
+            //         ),
+            //       ),
+            //     );
+            //   }).toList(),
+            // ),
             const Text(
               'reminder',
               style: TextStyle(
@@ -315,10 +315,9 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                 ),
                 InkWell(
                   onTap: () async {
-                    if (jadwal.isEmpty ||
-                        reminder.isEmpty ||
-                        judulController.text.isEmpty ||
-                        interval == null) {
+                    if (
+                      reminder.isEmpty ||
+                        judulController.text.isEmpty ) {
                       print(SnackBar(content: Text('harus diisi semua iya')));
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text('data tidak boleh kosong'),

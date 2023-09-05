@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:habitude_aplication/widgets/mapping_widget.dart';
 
 class MappingScreen extends StatelessWidget {
   const MappingScreen({super.key});
