@@ -97,13 +97,92 @@ class _HabitWidgetState extends State<HabitWidget> {
                           color: Colors.blue,
                         ),
                       ),
+              //menampilkan Dialog hapus        
                       InkWell(
-                        onTap: () async {
-                          await FirebaseFirestore.instance
-                              .collection("habits")
-                              .doc(widget.id)
-                              .delete();
-                        },
+                        onTap: () => showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => Dialog(
+                            backgroundColor: Colors.transparent,
+                            child: Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: 100, maxHeight: 100),
+                              padding: EdgeInsets.all(18),
+                              decoration: BoxDecoration(color: Colors.red),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Konfirmasi Hapus",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.only(
+                                              top: 8.0, right: 4.0),
+                                          height: 28,
+                                          width: 152,
+                                          decoration: BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 207, 88, 80),
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                            border: Border.all(
+                                              color: Color.fromARGB(
+                                                  255, 175, 42, 32),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            'cancel',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'TitanOne',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                          onTap: () async {
+                                            await FirebaseFirestore.instance
+                                                .collection("habits")
+                                                .doc(widget.id)
+                                                .delete();
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.only(
+                                                top: 8.0, right: 4.0),
+                                            height: 28,
+                                            width: 152,
+                                            decoration: BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 64, 152, 96),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              border: Border.all(
+                                                  color: Color.fromARGB(
+                                                      255, 42, 90, 59)),
+                                            ),
+                                            child: Text(
+                                              'delete',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'TitanOne',
+                                              ),
+                                            ),
+                                          ),
+                                          )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                         child: Icon(
                           Icons.delete,
                           color: Colors.red,
