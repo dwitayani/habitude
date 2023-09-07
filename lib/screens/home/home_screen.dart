@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:habitude_aplication/screens/account/account_screen.dart';
-
 import '../habbit/habbit_screen.dart';
 import '../mapping/mapping_screen.dart';
 import '../setting/setting_screen.dart';
@@ -26,7 +25,11 @@ class HomeScreen extends StatelessWidget {
               child: Image.asset('assets/splash.png'),
             ),
             leading: IconButton(
-              icon: Icon(Icons.settings,color: Colors.black, size: 35,),
+              icon: Icon(
+                Icons.settings,
+                color: Colors.black,
+                size: 35,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -45,9 +48,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AccountScreen()),
-                );
+                      context,
+                      MaterialPageRoute(builder: (context) => AccountScreen()),
+                    );
                   },
                 ),
               ),

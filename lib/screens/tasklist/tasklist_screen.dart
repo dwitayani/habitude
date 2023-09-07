@@ -11,31 +11,31 @@ class TasklistScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          color: Colors.blue[50],
+          color: Colors.white,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
               Container(
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                    "TASK LIST",
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'TitanOne',
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "TASK LIST",
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'TitanOne',
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
               StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: FirebaseFirestore.instance
                     .collection("tasklist")
@@ -59,10 +59,96 @@ class TasklistScreen extends StatelessWidget {
             ],
           )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Tindakan saat tombol tambah diklik
-          print('Tombol tambah diklik');
-        },
+        onPressed: () => showDialog(
+          context: context,
+          builder: (BuildContext context) => Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              constraints: BoxConstraints(maxWidth: 100, maxHeight: 180),
+              padding: EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 235, 142, 142),
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(
+                    color: Colors.red,
+                    width: 2.0,
+                  )),
+              child: Column(
+                children: [
+                  Text(
+                    "Create New Task",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'TitanOne',
+                    ),
+                  ),
+                  Container(
+                    child: TextField(
+                      // controller: judulController,
+                    ),
+                    margin: EdgeInsets.all(12),
+                    padding: EdgeInsets.all(8),
+                    width: 360,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(top: 8.0, right: 4.0),
+                          height: 28,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 126, 187, 148),
+                            borderRadius: BorderRadius.circular(24),
+                            border: Border.all(
+                              color: Color.fromARGB(255, 64, 115, 82),
+                              width: 2.0,
+                            ),
+                          ),
+                          child: Text(
+                            'cancel',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'TitanOne',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+        //  {
+        //   Dialog(
+        //     backgroundColor: Colors.transparent,
+        //     child: Container(
+        //       constraints: BoxConstraints(maxWidth: 1000.0, maxHeight: 800.0),
+        //       padding: EdgeInsets.all(18),
+        //       decoration: BoxDecoration(
+        //         color: Color.fromARGB(255, 126, 187, 148),
+        //         borderRadius: BorderRadius.circular(24),
+        //         border: Border.all(
+        //           color: Color.fromARGB(255, 64, 115, 82),
+        //           width: 2.0,
+        //         ),
+        //       ),
+        //     ),
+        //   );
+        //   // Tindakan saat tombol tambah diklik
+
+        //   // print('Tombol tambah diklik');
+        // },
         child: Icon(Icons.add),
         backgroundColor: Color(0xFF7EBB94),
       ),

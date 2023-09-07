@@ -295,9 +295,27 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                         ));
                         _isCompleate = false;
                       } else {
+                        List<Map<String, dynamic>> mappings = [];
+                        DateTime start = interval!.start;
+                        DateTime end = interval!.end;
+                        do {
+                          if (jadwal
+                              .contains(DateFormat('EEEE').format(start))) {
+                            mappings.add({
+                              "key": DateFormat("yyyyMMdd").format(start),
+                              "value": null,
+                            });
+                          }
+                          start = start.add(Duration(days: 1));
+                          print(DateFormat("yyyyMMdd").format(start) !=
+                              DateFormat("yyyyMMdd").format(end));
+                        } while (DateFormat("yyyyMMdd").format(start) !=
+                            DateFormat("yyyyMMdd").format(end));
                         await FirebaseFirestore.instance
                             .collection('habits')
                             .add({
+                          "createdAt": FieldValue.serverTimestamp(),
+                          "mappings": mappings,
                           "hari_mengulang": jadwal,
                           "jam_pengingat": reminder,
                           "nama": judulController.text,
