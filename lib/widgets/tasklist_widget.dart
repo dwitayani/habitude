@@ -40,12 +40,28 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             Row(
               children: [
                 Checkbox(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  side: MaterialStateBorderSide.resolveWith(
+                    (states) => BorderSide(width: 1.0, color: Colors.black),
+                  ),
+                  checkColor: Colors.black,
                   value: isChecked,
-                  onChanged: (bool? value) {
+                  onChanged: (_) {
                     setState(() {
-                      isChecked = value!;
+                      isChecked = !isChecked;
                     });
                   },
+                  activeColor: Colors.white,
+                  tristate: true, 
+                  // value: null,
+                  // value: isChecked,
+                  // onChanged: (bool? value) {
+                  //   setState(() {
+                  //     isChecked = value!;
+                  //   });
+                  // },
                 ),
                 Text(widget.namatask),
               ],

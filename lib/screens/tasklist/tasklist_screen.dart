@@ -84,6 +84,10 @@ class TasklistScreen extends StatelessWidget {
                   ),
                   Container(
                     child: TextField(
+                      decoration: InputDecoration(
+                    hintText: "TASK NAME",
+                    hintStyle: TextStyle(fontSize: 16, color: Colors.grey, fontFamily: 'TitanOne')
+                  ),
                       // controller: judulController,
                     ),
                     margin: EdgeInsets.all(12),

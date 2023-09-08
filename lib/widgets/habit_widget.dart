@@ -163,7 +163,7 @@ class _HabitWidgetState extends State<HabitWidget> {
                                             .showSnackBar(
                                           SnackBar(
                                             content:
-                                                Text('data berhasil diedit'),
+                                                Text('habit successfully deleted'),
                                             duration: Duration(seconds: 2),
                                           ),
                                         );
@@ -337,6 +337,12 @@ class _HabitWidgetState extends State<HabitWidget> {
                                     {'key': map['key'], 'value': false}
                                   ])
                                 });
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content:
+                                      Text('anda telah melewatkan habit anda'),
+                                  duration: Duration(seconds: 2),
+                                ));
                               },
                               child: Row(
                                 children: [
@@ -367,6 +373,11 @@ class _HabitWidgetState extends State<HabitWidget> {
                                     {'key': map['key'], 'value': true}
                                   ])
                                 });
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text('anda telah melakukan habit'),
+                                  duration: Duration(seconds: 2),
+                                ));
                               },
                               child: Row(
                                 children: [

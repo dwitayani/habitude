@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../../widgets/habit_widget.dart';
 // import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:carousel_slider/carousel_slider.dart';

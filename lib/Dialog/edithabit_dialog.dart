@@ -18,20 +18,6 @@ class EditHabitDialog extends StatefulWidget {
       required this.jamPengingat,
       required this.interval,
       required this.habit});
-  // const HabitWidget(
-  //     {super.key,
-  //     required this.id,
-  //     required this.judul,
-  //     required this.jadwalHari,
-  //     required this.jamPengingat,
-  //     required this.interval,
-  //     required this.habit
-  //     });
-  // final DocumentSnapshot<Map<String, dynamic>> habit;
-  // const EditHabitDialog(
-  //  {super.key,
-  //     required this.habit}
-  // );
 
   @override
   State<EditHabitDialog> createState() => _EditHabitDialogState();
@@ -72,13 +58,13 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
           color: Color.fromARGB(255, 126, 187, 183),
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-              color: const Color.fromARGB(255, 64, 115, 82), width: 4),
+              color: Color.fromARGB(252, 66, 128, 124), width: 4),
         ),
         child: SingleChildScrollView(
             child: Column(
           children: [
             Text(
-              "Edit Habit ude",
+              "Edit Habit ",
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'TitanOne',
@@ -146,7 +132,7 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                 }
               },
               child: Container(
-                alignment: Alignment.center,
+                alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(top: 8.0, right: 4.0),
                 height: 28,
                 width: 152,
@@ -165,14 +151,13 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.only(top: 8.0, right: 4.0),
                     height: 28,
                     width: 120,
@@ -215,7 +200,7 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('data berhasil diedit'),
+                          content: Text('habit edited successfully'),
                           duration: Duration(seconds: 2),
                         ),
                       );
@@ -223,7 +208,7 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                     }
                   },
                   child: Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.bottomRight,
                     margin: EdgeInsets.all(4),
                     height: 28,
                     width: 120,

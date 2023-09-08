@@ -19,11 +19,13 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Container(
-          width: 500, // 98% lebar layar
-          height: 800,
-          margin: const EdgeInsets.all(16.0),
+          // alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          // margin: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 126, 187, 148),
             borderRadius: BorderRadius.circular(28),
@@ -31,7 +33,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                 color: const Color.fromARGB(255, 64, 115, 82), width: 4),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Center(
                 child: Text(
@@ -45,9 +47,16 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
               ),
               Container(
                 child: TextField(
+                  decoration: InputDecoration(
+                      hintText: "HABIT NAME",
+                      hintStyle: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                          fontFamily: 'TitanOne')),
                   controller: judulController,
                 ),
-                margin: const EdgeInsets.only(top: 16, bottom: 16),
+                margin: EdgeInsets.symmetric(vertical: 16),
+                padding: EdgeInsets.all(8),
                 width: 360,
                 height: 48,
                 decoration: BoxDecoration(
@@ -79,7 +88,15 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   child: Text(interval != null
                       ? DateFormat("dd-MM-yyyy").format(interval!.start)
                       : ""),
-                  margin: const EdgeInsets.only(top: 16, bottom: 16),
+                  // decoration: InputDecoration(
+                  //     hintText: "HABIT NAME",
+                  //     hintStyle: TextStyle(
+                  //         fontSize: 16,
+                  //         color: Colors.grey,
+                  //         fontFamily: 'TitanOne')),
+                  // margin: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(8),
+                  margin: EdgeInsets.symmetric(vertical: 8),
                   width: 360,
                   height: 48,
                   decoration: BoxDecoration(
@@ -113,7 +130,9 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   child: Text(interval != null
                       ? DateFormat("dd-MM-yyyy").format(interval!.end)
                       : ""),
-                  margin: const EdgeInsets.only(top: 16, bottom: 16),
+                  // margin: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
+                  margin: EdgeInsets.symmetric(vertical: 8),
                   // padding: const EdgeInsets.all(5),
                   width: 360,
                   height: 48,
@@ -159,15 +178,15 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                       setState(() {});
                     },
                     child: Container(
-                      margin: const EdgeInsets.only(top: 8.0, right: 4.0),
+                      // margin: EdgeInsets.all(16),
+                      padding: EdgeInsets.all(4),
+                      margin: EdgeInsets.symmetric(vertical: 8),
                       // padding: const EdgeInsets.all(5),
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: isScheduled
-                            ? const Color.fromARGB(255, 255, 181, 181)
-                            : Colors.white,
+                        color: isScheduled ? Colors.grey : Colors.white,
                         border: Border.all(
                           color: Colors.grey,
                           width: 0.5,
@@ -178,9 +197,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'TitanOne',
-                          color: !isScheduled
-                              ? const Color.fromARGB(255, 255, 181, 181)
-                              : Colors.white,
+                          color: !isScheduled ? Colors.grey : Colors.white,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -200,6 +217,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                 return Row(
                   children: [
                     Container(
+                      margin: EdgeInsets.all(8),
                       child: Text(reminder[index]),
                       width: 160,
                       height: 32,
@@ -237,9 +255,9 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 8.0, right: 4.0),
-                  height: 28,
-                  width: 152,
+                  // margin: const EdgeInsets.only(top: 8.0, right: 4.0),
+                  height: 20,
+                  width: 120,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 64, 152, 96),
                     borderRadius: BorderRadius.circular(16),
@@ -255,7 +273,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   InkWell(
                     onTap: () {
@@ -325,7 +343,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                           }
                         });
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('data berhasil ditambah'),
+                          content: Text('habit successfully added'),
                           duration: Duration(seconds: 2),
                         ));
                         Navigator.pop(context);
