@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habitude_aplication/widgets/tasklist_widget.dart';
 
@@ -13,11 +14,27 @@ class TasklistScreen extends StatefulWidget {
 
 class _TasklistScreenState extends State<TasklistScreen> {
   TextEditingController judultaskController = TextEditingController();
+  User? user;
   @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((value) async {
+      if (value != null) {
+        user = value;
+      }
+      setState(() {});
+    });
+  }
+
   Widget build(BuildContext context) {
+    if (user == null) {
+      return Scaffold(
+        body: Text('loading'),
+      );
+    }
     return Scaffold(
       body: SingleChildScrollView(
-      child: Container(
+        child: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -46,6 +63,7 @@ class _TasklistScreenState extends State<TasklistScreen> {
               StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: FirebaseFirestore.instance
                     .collection("tasklist")
+                     .where('uid',isEqualTo: user?.uid)
                     .snapshots(),
                 builder: (_, snapshot) {
                   if (!snapshot.hasData) {
@@ -59,7 +77,7 @@ class _TasklistScreenState extends State<TasklistScreen> {
                       return TaskListWidget(
                         id: docs[index].id,
                         namatask: docs[index].data()!['nama_task'],
-                        tasklist: docs[index], 
+                        tasklist: docs[index],
                         status: docs[index].data()!['status'],
                       );
                     }),
@@ -68,7 +86,7 @@ class _TasklistScreenState extends State<TasklistScreen> {
               ),
             ],
           ),
-          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showDialog(
@@ -129,7 +147,8 @@ class _TasklistScreenState extends State<TasklistScreen> {
                             .add({
                           // "checklist": judultaskController.text,
                           "nama_task": judultaskController.text,
-                          "status":false
+                          "status": false,
+                          "uid":user?.uid
                         });
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('tasklist successfully added'),

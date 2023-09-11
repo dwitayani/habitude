@@ -37,9 +37,12 @@ class AccountScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              alignment: Alignment.center,
               width: 104,
               height: 48,
-              child: Text("Sign in"),
+              child: Text("Sign in", style: TextStyle(
+                fontFamily: 'TitanOne'
+              ),),
               decoration: BoxDecoration(
                 color: Colors.green,
                 borderRadius: BorderRadius.circular(8.0),

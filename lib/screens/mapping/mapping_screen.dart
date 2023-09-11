@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -8,11 +9,31 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:carousel_slider/carousel_slider.dart';
 // import 'package:habitude_aplication/widgets/mapping_widget.dart';
 
-class MappingScreen extends StatelessWidget {
+class MappingScreen extends StatefulWidget {
   const MappingScreen({super.key});
 
   @override
+  State<MappingScreen> createState() => _MappingScreenState();
+}
+
+class _MappingScreenState extends State<MappingScreen> {
+  User?user;
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((value) async {
+      if (value != null) {
+        user = value;
+      }
+      setState(() {});
+    });
+  }
   Widget build(BuildContext context) {
+     if (user == null) {
+      return Scaffold(
+        body: Text('loading'),
+      );
+    }
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -50,6 +71,7 @@ class MappingScreen extends StatelessWidget {
                       child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                         stream: FirebaseFirestore.instance
                             .collection("habits")
+                            .where('uid',isEqualTo: user?.uid)
                             .snapshots(),
                         builder: (_, snapshot) {
                           if (!snapshot.hasData) {

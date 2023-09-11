@@ -1,13 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habitude_aplication/widgets/habit_widget.dart';
 import '../form_tambah/formtambah_screen.dart';
 
-class habbitScreen extends StatelessWidget {
+class habbitScreen extends StatefulWidget {
   const habbitScreen({super.key});
 
   @override
+  State<habbitScreen> createState() => _habbitScreenState();
+}
+
+class _habbitScreenState extends State<habbitScreen> {
+  User? user;
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((value) async {
+      if (value != null) {
+        user = value;
+      }
+      setState(() {});
+    });
+  }
   Widget build(BuildContext context) {
+    if (user == null) {
+      return Scaffold(
+        body: Text('loading'),
+      );
+    }
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -47,6 +68,7 @@ class habbitScreen extends StatelessWidget {
                 StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream: FirebaseFirestore.instance
                       .collection("habits")
+                       .where('uid',isEqualTo: user?.uid)
                       .snapshots(),
                   builder: (_, snapshot) {
                     if (!snapshot.hasData) {

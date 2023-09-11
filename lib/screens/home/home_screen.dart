@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habitude_aplication/screens/account/account_screen.dart';
 import '../habbit/habbit_screen.dart';
@@ -5,11 +6,34 @@ import '../mapping/mapping_screen.dart';
 import '../setting/setting_screen.dart';
 import '../tasklist/tasklist_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  User? user;
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((value) async {
+      if (value != null) {
+        user = value;
+      } else {
+        await FirebaseAuth.instance.signInAnonymously();
+      }
+      setState(() {});
+    });
+  }
+
   Widget build(BuildContext context) {
+    if (user == null) {
+      return Scaffold(
+        body: Text('loading'),
+      );
+    }
     return DefaultTabController(
         length: 3,
         initialIndex: 1,

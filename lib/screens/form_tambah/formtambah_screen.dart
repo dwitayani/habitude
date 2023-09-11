@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 
 class FormTambahScreen extends StatefulWidget {
   const FormTambahScreen({super.key});
@@ -16,9 +16,25 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
   List<String> reminder = [];
   DateTimeRange? interval;
   bool _isCompleate = true;
+  User? user;
 
   @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((value) async {
+      if (value != null) {
+        user = value;
+      }
+      setState(() {});
+    });
+  }
+
   Widget build(BuildContext context) {
+    if (user == null) {
+      return Scaffold(
+        body: Text('loading'),
+      );
+    }
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -345,7 +361,8 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                           "interval": {
                             "start": interval?.start,
                             "end": interval?.end,
-                          }
+                          },
+                          "uid":user?.uid,
                         });
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('habit successfully added'),
