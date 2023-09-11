@@ -103,8 +103,8 @@ class _HabitWidgetState extends State<HabitWidget> {
                         builder: (BuildContext context) => Dialog(
                           backgroundColor: Colors.transparent,
                           child: Container(
-                            constraints:
-                                BoxConstraints(maxWidth: 100, maxHeight: 140),
+                            constraints: BoxConstraints(
+                                maxWidth: 1000.0, maxHeight: 200),
                             padding: EdgeInsets.all(18),
                             decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 235, 142, 142),
@@ -114,9 +114,12 @@ class _HabitWidgetState extends State<HabitWidget> {
                                   width: 2.0,
                                 )),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                Icon(Icons.delete_outline, size: 40, color: Colors.red,),
                                 Text(
                                   "Are you sure you want delete this habit?",
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'TitanOne',
@@ -132,7 +135,7 @@ class _HabitWidgetState extends State<HabitWidget> {
                                         alignment: Alignment.center,
                                         padding: EdgeInsets.only(
                                             top: 8.0, right: 4.0),
-                                        height: 28,
+                                        height: 40,
                                         width: 120,
                                         decoration: BoxDecoration(
                                           color:
@@ -162,8 +165,8 @@ class _HabitWidgetState extends State<HabitWidget> {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
-                                            content:
-                                                Text('habit successfully deleted'),
+                                            content: Text(
+                                                'habit successfully deleted'),
                                             duration: Duration(seconds: 2),
                                           ),
                                         );
@@ -172,7 +175,7 @@ class _HabitWidgetState extends State<HabitWidget> {
                                       child: Container(
                                         alignment: Alignment.center,
                                         margin: EdgeInsets.all(4),
-                                        height: 28,
+                                        height: 40,
                                         width: 120,
                                         decoration: BoxDecoration(
                                           color:

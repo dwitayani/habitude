@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:habitude_aplication/screens/mapping/mapping_screen.dart';
 import 'screens/splashscreen/splash_screen.dart';
-import 'screens/home/home_screen.dart';
-import 'screens/form_tambah/formtambah_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'screens/tasklist/tasklist_screen.dart';
 // import 'widgets/tasklist_widget.dart';
 
 void main()  async{
@@ -24,11 +20,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/splashScreen',
       routes: {
         '/splashScreen':(context) => SplashScreen(),
-        '/homeScreen':(context) => HomeScreen(),
-        '/formTambahScreen':(context) => FormTambahScreen(),
-        '/mappingScreen':(context) => MappingScreen(),
-        '/taskListScreen':(context) => TasklistScreen(),
-
       },
     );
   }

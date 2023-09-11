@@ -15,10 +15,11 @@ dependencies:
     sdk: flutter 
 
   cupertino_icons: ^1.0.2
-  firebase_core: ^2.15.0
+  firebase_core: ^2.15.1
   cloud_firestore: ^4.8.4
   intl: ^0.18.1
   syncfusion_flutter_charts: ^22.2.12
+  firebase_auth: ^4.9.0
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+
 class FormTambahScreen extends StatefulWidget {
   const FormTambahScreen({super.key});
 
@@ -46,6 +47,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                 ),
               ),
               Container(
+                alignment: Alignment.center,
                 child: TextField(
                   decoration: InputDecoration(
                       hintText: "HABIT NAME",
@@ -85,6 +87,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   setState(() {});
                 },
                 child: Container(
+                  alignment: Alignment.center,
                   child: Text(interval != null
                       ? DateFormat("dd-MM-yyyy").format(interval!.start)
                       : ""),
@@ -127,6 +130,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   setState(() {});
                 },
                 child: Container(
+                  alignment: Alignment.center,
                   child: Text(interval != null
                       ? DateFormat("dd-MM-yyyy").format(interval!.end)
                       : ""),
@@ -217,6 +221,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                 return Row(
                   children: [
                     Container(
+                      alignment: Alignment.center,
                       margin: EdgeInsets.all(8),
                       child: Text(reminder[index]),
                       width: 160,
@@ -256,7 +261,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                 child: Container(
                   alignment: Alignment.center,
                   // margin: const EdgeInsets.only(top: 8.0, right: 4.0),
-                  height: 20,
+                  height: 28,
                   width: 120,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 64, 152, 96),
@@ -264,7 +269,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                     border: Border.all(color: Color.fromARGB(255, 42, 90, 59)),
                   ),
                   child: Text(
-                    'add',
+                    'add reminder',
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'TitanOne',
@@ -282,7 +287,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                     child: Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.only(top: 8.0, right: 4.0),
-                      height: 28,
+                      height: 40,
                       width: 152,
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 207, 88, 80),
@@ -308,7 +313,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                           interval == null) {
                         print(SnackBar(content: Text('harus diisi semua iya')));
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('data tidak boleh kosong'),
+                          content: Text('habit cannot be empty'),
                           duration: Duration(seconds: 2),
                         ));
                         _isCompleate = false;
@@ -351,8 +356,8 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      margin: EdgeInsets.only(top: 8.0, right: 4.0),
-                      height: 28,
+                      margin: EdgeInsets.all(4),
+                      height: 40,
                       width: 152,
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 64, 152, 96),

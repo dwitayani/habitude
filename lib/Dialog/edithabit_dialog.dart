@@ -56,9 +56,9 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
         // height: 250,
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 126, 187, 183),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-              color: Color.fromARGB(252, 66, 128, 124), width: 4),
+          borderRadius: BorderRadius.circular(16),
+          border:
+              Border.all(color: Color.fromARGB(252, 66, 128, 124), width: 4),
         ),
         child: SingleChildScrollView(
             child: Column(
@@ -80,6 +80,7 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
               width: 360,
               height: 48,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
                 color: Colors.white,
               ),
             ),
@@ -95,6 +96,8 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
               return Row(
                 children: [
                   Container(
+                    padding: EdgeInsets.all(4),
+                    margin: EdgeInsets.symmetric(vertical: 8),
                     child: Text(reminder[index]),
                     alignment: Alignment.center,
                     width: 120,
@@ -132,17 +135,17 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                 }
               },
               child: Container(
-                alignment: Alignment.centerLeft,
-                margin: const EdgeInsets.only(top: 8.0, right: 4.0),
+                alignment: Alignment.center,
+                // margin: const EdgeInsets.only(top: 8.0, right: 4.0),
                 height: 28,
-                width: 152,
+                width: 120,
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 64, 152, 96),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Color.fromARGB(255, 42, 90, 59)),
                 ),
                 child: Text(
-                  'add',
+                  'add reminder',
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'TitanOne',
@@ -157,13 +160,13 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    alignment: Alignment.bottomLeft,
+                    alignment: Alignment.center,
                     padding: EdgeInsets.only(top: 8.0, right: 4.0),
-                    height: 28,
+                    height: 40,
                     width: 120,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 207, 88, 80),
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(8),
                       border: Border.all(
                         color: Color.fromARGB(255, 175, 42, 32),
                       ),
@@ -182,7 +185,7 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                     if (reminder.isEmpty || judulController.text.isEmpty) {
                       print(SnackBar(content: Text('harus diisi semua iya')));
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('data tidak boleh kosong'),
+                        content: Text('habit cannot be empty'),
                         duration: Duration(seconds: 2),
                       ));
                     } else {
@@ -208,13 +211,13 @@ class _EditHabitDialogState extends State<EditHabitDialog> {
                     }
                   },
                   child: Container(
-                    alignment: Alignment.bottomRight,
+                    alignment: Alignment.center,
                     margin: EdgeInsets.all(4),
-                    height: 28,
+                    height: 40,
                     width: 120,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 64, 152, 96),
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(8),
                       border:
                           Border.all(color: Color.fromARGB(255, 42, 90, 59)),
                     ),

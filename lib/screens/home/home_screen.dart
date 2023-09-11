@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                 tabs: [
                   Tab(
                     icon: Icon(
-                      Icons.task_outlined,
+                      Icons.list_rounded,
                       size: 35,
                     ),
                   ),

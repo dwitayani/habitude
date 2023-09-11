@@ -4,13 +4,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:habitude_aplication/widgets/tasklist_widget.dart';
 
-class TasklistScreen extends StatelessWidget {
+class TasklistScreen extends StatefulWidget {
   const TasklistScreen({super.key});
 
   @override
+  State<TasklistScreen> createState() => _TasklistScreenState();
+}
+
+class _TasklistScreenState extends State<TasklistScreen> {
+  TextEditingController judultaskController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
+      child: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -48,16 +55,21 @@ class TasklistScreen extends StatelessWidget {
                       snapshot.data!.docs;
                   return Column(
                     children: List.generate(docs.length, (index) {
+                      print(docs[index].data()!['status']);
                       return TaskListWidget(
                         id: docs[index].id,
                         namatask: docs[index].data()!['nama_task'],
+                        tasklist: docs[index], 
+                        status: docs[index].data()!['status'],
                       );
                     }),
                   );
                 },
               ),
             ],
-          )),
+          ),
+          ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showDialog(
           context: context,
@@ -67,10 +79,10 @@ class TasklistScreen extends StatelessWidget {
               constraints: BoxConstraints(maxWidth: 100, maxHeight: 180),
               padding: EdgeInsets.all(18),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 235, 142, 142),
+                  color: Color.fromARGB(255, 126, 187, 148),
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
-                    color: Colors.red,
+                    color: Color.fromARGB(255, 64, 115, 82),
                     width: 2.0,
                   )),
               child: Column(
@@ -85,10 +97,13 @@ class TasklistScreen extends StatelessWidget {
                   Container(
                     child: TextField(
                       decoration: InputDecoration(
-                    hintText: "TASK NAME",
-                    hintStyle: TextStyle(fontSize: 16, color: Colors.grey, fontFamily: 'TitanOne')
-                  ),
-                      // controller: judulController,
+                        hintText: "TASK NAME",
+                        hintStyle: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                            fontFamily: 'TitanOne'),
+                      ),
+                      controller: judultaskController,
                     ),
                     margin: EdgeInsets.all(12),
                     padding: EdgeInsets.all(8),
@@ -96,38 +111,54 @@ class TasklistScreen extends StatelessWidget {
                     height: 48,
                     decoration: BoxDecoration(
                       color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
                     ),
                   ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(top: 8.0, right: 4.0),
-                          height: 28,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 126, 187, 148),
-                            borderRadius: BorderRadius.circular(24),
-                            border: Border.all(
-                              color: Color.fromARGB(255, 64, 115, 82),
-                              width: 2.0,
-                            ),
-                          ),
-                          child: Text(
-                            'cancel',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'TitanOne',
-                            ),
-                          ),
+                  InkWell(
+                    onTap: () async {
+                      if (judultaskController.text.isEmpty) {
+                        print(SnackBar(content: Text('harus diisi semua iya')));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('tasklist cannot be empty'),
+                          duration: Duration(seconds: 2),
+                        ));
+                      } else {
+                        // List<Map<String, dynamic>> tasklist= [];
+                        await FirebaseFirestore.instance
+                            .collection('tasklist')
+                            .add({
+                          // "checklist": judultaskController.text,
+                          "nama_task": judultaskController.text,
+                          "status":false
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('tasklist successfully added'),
+                          duration: Duration(seconds: 2),
+                        ));
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 28,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 64, 115, 82),
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(
+                          color: Color.fromARGB(255, 64, 115, 82),
+                          width: 2.0,
                         ),
                       ),
-                    ],
-                  )
+                      child: Text(
+                        'save',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'TitanOne',
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
