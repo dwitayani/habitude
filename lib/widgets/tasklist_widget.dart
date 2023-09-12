@@ -23,12 +23,6 @@ class TaskListWidget extends StatefulWidget {
 class _TaskListWidgetState extends State<TaskListWidget> {
   TextEditingController judultaskController = TextEditingController();
 
-//   @override
-// void initState() {
-//     super.initState();
-//     judultaskController.text = widget.tasklist.data()?['nama'];
-//   }
-
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -46,8 +40,15 @@ class _TaskListWidgetState extends State<TaskListWidget> {
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(
             color: Colors.black,
-            width: 1.0,
           ),
+          boxShadow: [
+                BoxShadow(
+                  color: Colors.grey, 
+                  offset: Offset(0, 3), // Arah bayangan (horizontal, vertical)
+                  blurRadius: 3.0, // Ketajaman bayangan
+                  spreadRadius: 1.5, // Sebaran bayangan
+                ),
+              ],
         ),
         child: Column(
           children: [
@@ -68,20 +69,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                                       .collection('tasklist')
                                       .doc(widget.tasklist.id)
                                       .update({
-                                    // "checklist": judultaskController.text,
                                     "status": !widget.status,
                                   });
                     });
                   },
                   activeColor: Colors.white,
                   tristate: true,
-                  // value: null,
-                  // value: status,
-                  // onChanged: (bool? value) {
-                  //   setState(() {
-                  //     status = value!;
-                  //   });
-                  // },
                 ),
                 Text(widget.namatask),
               ],
@@ -149,12 +142,10 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                                     duration: Duration(seconds: 2),
                                   ));
                                 } else {
-                                  // List<Map<String, dynamic>> tasklist= [];
                                   await FirebaseFirestore.instance
                                       .collection('tasklist')
                                       .doc(widget.tasklist.id)
                                       .update({
-                                    // "checklist": judultaskController.text,
                                     "nama_task": judultaskController.text,
                                   });
                                   ScaffoldMessenger.of(context)

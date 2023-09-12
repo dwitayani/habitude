@@ -21,9 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
     FirebaseAuth.instance.authStateChanges().listen((value) async {
       if (value != null) {
         user = value;
-      } else {
-        await FirebaseAuth.instance.signInAnonymously();
-      }
+      } 
+      // else {
+      //   await FirebaseAuth.instance.signInAnonymously();
+      // }
       setState(() {});
     });
   }
@@ -93,6 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: Color(0xFF9BABB8),
+                border: Border.all(
+                  color: Colors.black,
+                ),
               ),
               child: TabBar(
                 tabs: [
@@ -115,33 +119,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   )
                 ],
-                // backgroundColor: Color(0xFF9BABB8),
-                // selectedItemColor: Color(0xFFD1E7FA),
-                // unselectedItemColor: Color(0xFF5F6469),
-                // ignore: prefer_const_literals_to_create_immutables
-
-                // BottomNavigationBarItem(
-                //   icon: Icon(
-                //     Icons.list_outlined,
-                //     size: 35,
-                //   ),
-                //   label: 'Task List',
-                // ),
-
-                // BottomNavigationBarItem(
-                //   icon: Icon(
-                //     Icons.home,
-                //     size: 35,
-                //   ),
-                //   label: 'Home',
-                // ),
-                // BottomNavigationBarItem(
-                //   icon: Icon(
-                //     Icons.calendar_month,
-                //     size: 35,
-                //   ),
-                //   label: 'Mapping',
-                // ),
               ),
             ),
           ),

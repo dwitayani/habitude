@@ -38,13 +38,21 @@ class _HabitWidgetState extends State<HabitWidget> {
       padding: const EdgeInsets.all(24.0),
       decoration: BoxDecoration(
         color: widget.jadwalHari.contains(DateFormat("EEEE").format(today))
-            ? Color.fromARGB(250, 255, 209, 201)
-            : Color.fromARGB(250, 255, 209, 201).withOpacity(0.5),
+            ? Color.fromARGB(249, 250, 197, 188)
+            : Color.fromARGB(249, 255, 222, 216),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
           color: Colors.black,
           width: 1.0,
         ),
+        boxShadow: [
+                BoxShadow(
+                  color: Colors.grey, 
+                  offset: Offset(0, 3), // Arah bayangan (horizontal, vertical)
+                  blurRadius: 3.0, // Ketajaman bayangan
+                  spreadRadius: 1.5, // Sebaran bayangan
+                ),
+              ],
       ),
       child: Column(
         children: [
@@ -66,7 +74,7 @@ class _HabitWidgetState extends State<HabitWidget> {
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: 'TitanOne',
-                        color: Colors.grey,
+                        color: Colors.white60,
                       ),
                     ),
                   ],

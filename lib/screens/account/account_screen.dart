@@ -1,10 +1,32 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
   @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  User?user;
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((value) async {
+      if (value != null) {
+        user = value;
+      }
+      setState(() {});
+    });
+  }
   Widget build(BuildContext context) {
+     if (user == null) {
+      return Scaffold(
+        body: Text('loading'),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -36,7 +58,17 @@ class AccountScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            Container(
+            InkWell(
+              onTap: ()async {
+                final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+ await FirebaseAuth.instance.signInWithCredential(credential);
+              },
+              child: Container(
               alignment: Alignment.center,
               width: 104,
               height: 48,
@@ -49,6 +81,7 @@ class AccountScreen extends StatelessWidget {
                 border: Border.all(
                     color: Color.fromARGB(255, 38, 114, 38), width: 1.0),
               ),
+            )
             )
           ],
         ),

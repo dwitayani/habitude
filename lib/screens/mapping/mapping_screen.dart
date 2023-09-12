@@ -17,7 +17,7 @@ class MappingScreen extends StatefulWidget {
 }
 
 class _MappingScreenState extends State<MappingScreen> {
-  User?user;
+  User? user;
   @override
   void initState() {
     super.initState();
@@ -28,8 +28,9 @@ class _MappingScreenState extends State<MappingScreen> {
       setState(() {});
     });
   }
+
   Widget build(BuildContext context) {
-     if (user == null) {
+    if (user == null) {
       return Scaffold(
         body: Text('loading'),
       );
@@ -71,7 +72,7 @@ class _MappingScreenState extends State<MappingScreen> {
                       child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                         stream: FirebaseFirestore.instance
                             .collection("habits")
-                            .where('uid',isEqualTo: user?.uid)
+                            .where('uid', isEqualTo: user?.uid)
                             .snapshots(),
                         builder: (_, snapshot) {
                           if (!snapshot.hasData) {
@@ -126,13 +127,22 @@ class _MappingScreenState extends State<MappingScreen> {
                                       horizontal: 2,
                                     ),
                                     decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 239, 212, 172),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
                                         color:
-                                            Color.fromARGB(255, 239, 212, 172),
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color:
-                                              Color.fromARGB(255, 164, 136, 94),
-                                        )),
+                                            Colors.black
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0,
+                                              3), // Arah bayangan (horizontal, vertical)
+                                          blurRadius: 3.0, // Ketajaman bayangan
+                                          spreadRadius: 1.5, // Sebaran bayangan
+                                        ),
+                                      ],
+                                    ),
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 16,
                                       vertical: 16,

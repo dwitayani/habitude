@@ -107,13 +107,6 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                   child: Text(interval != null
                       ? DateFormat("dd-MM-yyyy").format(interval!.start)
                       : ""),
-                  // decoration: InputDecoration(
-                  //     hintText: "HABIT NAME",
-                  //     hintStyle: TextStyle(
-                  //         fontSize: 16,
-                  //         color: Colors.grey,
-                  //         fontFamily: 'TitanOne')),
-                  // margin: EdgeInsets.all(16),
                   padding: EdgeInsets.all(8),
                   margin: EdgeInsets.symmetric(vertical: 8),
                   width: 360,
@@ -362,7 +355,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                             "start": interval?.start,
                             "end": interval?.end,
                           },
-                          "uid":user?.uid,
+                          "uid": user?.uid,
                         });
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('habit successfully added'),
@@ -390,9 +383,13 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
+              if (user?.isAnonymous == true)
+                Container(
+                  child: Text('Anda belum Login, Data akan Hilang'),
+                ),
             ],
           ),
         ),

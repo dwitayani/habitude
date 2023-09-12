@@ -183,28 +183,15 @@ class _TasklistScreenState extends State<TasklistScreen> {
             ),
           ),
         ),
-        //  {
-        //   Dialog(
-        //     backgroundColor: Colors.transparent,
-        //     child: Container(
-        //       constraints: BoxConstraints(maxWidth: 1000.0, maxHeight: 800.0),
-        //       padding: EdgeInsets.all(18),
-        //       decoration: BoxDecoration(
-        //         color: Color.fromARGB(255, 126, 187, 148),
-        //         borderRadius: BorderRadius.circular(24),
-        //         border: Border.all(
-        //           color: Color.fromARGB(255, 64, 115, 82),
-        //           width: 2.0,
-        //         ),
-        //       ),
-        //     ),
-        //   );
-        //   // Tindakan saat tombol tambah diklik
-
-        //   // print('Tombol tambah diklik');
-        // },
-        child: Icon(Icons.add),
-        backgroundColor: Color(0xFF7EBB94),
+        child: Container(
+            child: Icon(Icons.add),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+                color: Color(0xFF7EBB94),
+                borderRadius: BorderRadius.circular(50),
+                border: Border.all(color: Colors.black)),
+          ),
       ),
     );
   }

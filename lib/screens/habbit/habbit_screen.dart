@@ -23,6 +23,7 @@ class _habbitScreenState extends State<habbitScreen> {
       setState(() {});
     });
   }
+
   Widget build(BuildContext context) {
     if (user == null) {
       return Scaffold(
@@ -38,8 +39,15 @@ class _habbitScreenState extends State<habbitScreen> {
               MaterialPageRoute(builder: (context) => FormTambahScreen()),
             );
           },
-          child: Icon(Icons.add),
-          backgroundColor: Color(0xFF7EBB94),
+          child: Container(
+            child: Icon(Icons.add),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+                color: Color(0xFF7EBB94),
+                borderRadius: BorderRadius.circular(50),
+                border: Border.all(color: Colors.black)),
+          ),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -68,7 +76,7 @@ class _habbitScreenState extends State<habbitScreen> {
                 StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream: FirebaseFirestore.instance
                       .collection("habits")
-                       .where('uid',isEqualTo: user?.uid)
+                      .where('uid', isEqualTo: user?.uid)
                       .snapshots(),
                   builder: (_, snapshot) {
                     if (!snapshot.hasData) {
