@@ -22,9 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
       if (value != null) {
         user = value;
       } 
-      // else {
-      //   await FirebaseAuth.instance.signInAnonymously();
-      // }
+      else {
+        await FirebaseAuth.instance.signInAnonymously();
+      }
       setState(() {});
     });
   }
@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // backgroundColor: Colors.white.withAlpha(0),
           appBar: AppBar(
             toolbarHeight: 70,
+            elevation: 0,
             centerTitle: true,
             backgroundColor: Colors.white,
             title: SizedBox(
@@ -93,7 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
             width: 356,
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xFF9BABB8),
+                color: Color.fromARGB(255, 170, 170, 170),
+                borderRadius: BorderRadius.circular(30),
                 border: Border.all(
                   color: Colors.black,
                 ),

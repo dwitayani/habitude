@@ -38,8 +38,8 @@ class _HabitWidgetState extends State<HabitWidget> {
       padding: const EdgeInsets.all(24.0),
       decoration: BoxDecoration(
         color: widget.jadwalHari.contains(DateFormat("EEEE").format(today))
-            ? Color.fromARGB(249, 250, 197, 188)
-            : Color.fromARGB(249, 255, 222, 216),
+            ? Color.fromARGB(255, 255, 199, 199)
+            : Color.fromARGB(255, 255, 226, 226),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
           color: Colors.black,

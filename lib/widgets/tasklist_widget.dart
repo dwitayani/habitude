@@ -23,6 +23,12 @@ class TaskListWidget extends StatefulWidget {
 class _TaskListWidgetState extends State<TaskListWidget> {
   TextEditingController judultaskController = TextEditingController();
 
+@override
+void initState(){
+  super.initState();
+  judultaskController.text = widget.tasklist.data()?['nama_task'];
+}
+
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -36,7 +42,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
         ),
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 231, 231, 255),
+          color: Color.fromARGB(255, 246, 246, 246),
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(
             color: Colors.black,

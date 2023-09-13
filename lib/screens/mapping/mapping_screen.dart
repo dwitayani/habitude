@@ -129,10 +129,7 @@ class _MappingScreenState extends State<MappingScreen> {
                                     decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 239, 212, 172),
                                       borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                        color:
-                                            Colors.black
-                                      ),
+                                      border: Border.all(color: Colors.black),
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.grey,
@@ -153,7 +150,7 @@ class _MappingScreenState extends State<MappingScreen> {
                                           data['nama'] ?? "-",
                                           style: const TextStyle(
                                               fontSize: 32.0,
-                                              fontFamily: 'TitiliumWeb'),
+                                              fontFamily: 'TitanOne'),
                                         ),
                                         const SizedBox(
                                           height: 32,
@@ -277,12 +274,11 @@ class _MappingScreenState extends State<MappingScreen> {
                                           height: 120,
                                           decoration: BoxDecoration(
                                               color: Color.fromARGB(
-                                                  255, 229, 210, 142),
+                                                  255, 255, 246, 220),
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                               border: Border.all(
-                                                color: Color.fromARGB(
-                                                    255, 130, 117, 73),
+                                                color: Colors.black,
                                               )),
                                           child: Row(
                                             mainAxisAlignment:
@@ -294,9 +290,10 @@ class _MappingScreenState extends State<MappingScreen> {
                                                 children: [
                                                   Text('Completed',
                                                       style: TextStyle(
+                                                        fontSize: 10,
                                                           color: Colors.green,
                                                           fontFamily:
-                                                              'TitiliumWeb')),
+                                                              'TitanOne')),
                                                   SizedBox(
                                                     height: 16,
                                                   ),
@@ -304,7 +301,7 @@ class _MappingScreenState extends State<MappingScreen> {
                                                     "${success}",
                                                     style: TextStyle(
                                                       fontSize: 28,
-                                                      fontFamily: 'TitiliumWeb',
+                                                      fontFamily: 'TitanOne',
                                                       color: Colors.green,
                                                     ),
                                                   ),
@@ -318,9 +315,9 @@ class _MappingScreenState extends State<MappingScreen> {
                                                   Text(
                                                     'Missed',
                                                     style: TextStyle(
+                                                      fontSize: 10,
                                                         color: Colors.red,
-                                                        fontFamily:
-                                                            'TitiliumWeb'),
+                                                        fontFamily: 'TitanOne'),
                                                   ),
                                                   SizedBox(
                                                     height: 16,
@@ -329,7 +326,7 @@ class _MappingScreenState extends State<MappingScreen> {
                                                     "${failed}",
                                                     style: TextStyle(
                                                       fontSize: 28,
-                                                      fontFamily: 'TitiliumWeb',
+                                                      fontFamily: 'TitanOne',
                                                       color: Colors.red,
                                                     ),
                                                   ),
@@ -343,9 +340,9 @@ class _MappingScreenState extends State<MappingScreen> {
                                                   Text(
                                                     'Remaining',
                                                     style: TextStyle(
-                                                        color: Colors.grey[100],
-                                                        fontFamily:
-                                                            'TitiliumWeb'),
+                                                      fontSize: 10,
+                                                        color: Colors.grey,
+                                                        fontFamily: 'TitanOne'),
                                                   ),
                                                   SizedBox(
                                                     height: 16,
@@ -354,8 +351,8 @@ class _MappingScreenState extends State<MappingScreen> {
                                                     "${pending}",
                                                     style: TextStyle(
                                                       fontSize: 28,
-                                                      fontFamily: 'TitiliumWeb',
-                                                      color: Colors.grey[100],
+                                                      fontFamily: 'TitanOne',
+                                                      color: Colors.grey,
                                                     ),
                                                   ),
                                                 ],
@@ -363,28 +360,6 @@ class _MappingScreenState extends State<MappingScreen> {
                                             ],
                                           ),
                                         ),
-
-                                        // Text(
-                                        //   '10 x Dilakukan',
-                                        //   style: TextStyle(
-                                        //     // color: Colors.white,
-                                        //     fontSize: 22,
-                                        //   ),
-                                        // ),
-                                        // Text(
-                                        //   '0 x Telewat',
-                                        //   style: TextStyle(
-                                        //     // color: Colors.white,
-                                        //     fontSize: 22,
-                                        //   ),
-                                        // ),
-                                        // Text(
-                                        //   '14 x Tersisa',
-                                        //   style: TextStyle(
-                                        //     // color: Colors.white,
-                                        //     fontSize: 22,
-                                        //   ),
-                                        // ),
                                       ],
                                     ),
                                   );

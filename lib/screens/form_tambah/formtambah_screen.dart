@@ -42,7 +42,7 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           // margin: const EdgeInsets.all(16.0),
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.symmetric(vertical: 28, horizontal: 16),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 126, 187, 148),
             borderRadius: BorderRadius.circular(28),
@@ -388,7 +388,13 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
               ),
               if (user?.isAnonymous == true)
                 Container(
-                  child: Text('Anda belum Login, Data akan Hilang'),
+                  child: Text(
+                    'If you have not logged in, your habit data will be lost, please log in so your data is safe',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      
+                    ),
+                  ),
                 ),
             ],
           ),

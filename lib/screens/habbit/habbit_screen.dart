@@ -62,6 +62,7 @@ class _habbitScreenState extends State<habbitScreen> {
                 const Text(
                   "Welcome",
                   style: TextStyle(
+                    fontFamily: 'TitanOne',
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
@@ -69,6 +70,7 @@ class _habbitScreenState extends State<habbitScreen> {
                 Text(
                   "Your habits start here",
                   style: TextStyle(
+                    fontFamily: 'TitanOne',
                     fontSize: 16,
                     color: Colors.grey[600],
                   ),
