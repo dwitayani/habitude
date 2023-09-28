@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habitude_aplication/screens/tasklist/tasklist_screen.dart';
 import 'screens/splashscreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/splashScreen',
       routes: {
         '/splashScreen':(context) => SplashScreen(),
+        '/tasklist':(context) => TasklistScreen(),
       },
     );
   }

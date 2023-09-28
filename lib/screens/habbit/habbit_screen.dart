@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// import 'package:habitude_aplication/screens/account/account_screen.dart';
+// import 'package:habitude_aplication/screens/setting/setting_screen.dart';
 import 'package:habitude_aplication/widgets/habit_widget.dart';
 import '../form_tambah/formtambah_screen.dart';
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 
 class habbitScreen extends StatefulWidget {
   const habbitScreen({super.key});
@@ -16,13 +19,21 @@ class _habbitScreenState extends State<habbitScreen> {
   @override
   void initState() {
     super.initState();
-    FirebaseAuth.instance.authStateChanges().listen((value) async {
-      if (value != null) {
-        user = value;
-      }
-      setState(() {});
-    });
+    FirebaseAuth.instance.authStateChanges().listen(
+      (value) async {
+        if (value != null) {
+          user = value;
+        }
+        setState(() {});
+      },
+    );
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _resetSelectedDate();
+  // }
 
   Widget build(BuildContext context) {
     if (user == null) {
@@ -49,32 +60,46 @@ class _habbitScreenState extends State<habbitScreen> {
                 border: Border.all(color: Colors.black)),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
-            ),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 16,
+          ),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   "Welcome",
                   style: TextStyle(
-                    fontFamily: 'TitanOne',
-                    fontSize: 24,
+                    fontFamily: 'Cocogoose',
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   "Your habits start here",
                   style: TextStyle(
-                    fontFamily: 'TitanOne',
-                    fontSize: 16,
+                    fontFamily: 'TitilliumWeb',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                     color: Colors.grey[600],
                   ),
                 ),
+                SizedBox(height: 16),
+                EasyDateTimeLine(
+                  initialDate: DateTime.now(),
+                  onDateChange: (selectedDate) {
+                    //[selectedDate] the new date selected.
+                  },
+                  activeColor: Color.fromARGB(255, 244, 154, 98),
+                  dayProps: const EasyDayProps(
+                    todayHighlightStyle: TodayHighlightStyle.withBackground,
+                    todayHighlightColor: Color.fromARGB(255, 249, 204, 176),
+                  ),
+                ),
+                const SizedBox(height: 40),
                 StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream: FirebaseFirestore.instance
                       .collection("habits")

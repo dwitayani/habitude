@@ -341,8 +341,8 @@ class _FormTambahScreenState extends State<FormTambahScreen> {
                           start = start.add(Duration(days: 1));
                           print(DateFormat("yyyyMMdd").format(start) !=
                               DateFormat("yyyyMMdd").format(end));
-                        } while (DateFormat("yyyyMMdd").format(start) !=
-                            DateFormat("yyyyMMdd").format(end));
+                        } while (int.parse(DateFormat("yyyyMMdd").format(start)) <=
+                            int.parse(DateFormat("yyyyMMdd").format(end)));
                         await FirebaseFirestore.instance
                             .collection('habits')
                             .add({

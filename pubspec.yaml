@@ -15,12 +15,16 @@ dependencies:
     sdk: flutter 
 
   cupertino_icons: ^1.0.2
-  firebase_core: ^2.15.1
+  firebase_core: ^2.16.0
   cloud_firestore: ^4.8.4
   intl: ^0.18.1
   syncfusion_flutter_charts: ^22.2.12
   firebase_auth: ^4.9.0
   google_sign_in: ^6.1.5
+  calendar_timeline: ^1.1.2
+  easy_date_timeline: ^0.1.1
+  firebase_messaging: ^14.6.8
+  awesome_notifications: ^0.6.19
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +42,10 @@ flutter:
     - family: TitilliumWeb
       fonts:
         - asset: assets/TitilliumWeb-Regular.ttf
+
+    - family: Cocogoose
+      fonts:
+        - asset: assets/Cocogoose Pro-trial.ttf
 
   assets:
     - assets/splash.png
